@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -6,7 +6,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getWelcome(): string {
+    return `<h1>${this.appService.getWelcome()}<h1>`;
+  }
+
+  @Get(':name')
+  getRespect(@Param('name') name): string {
+    return `<h1>${this.appService.getWelcome()}<h1><br/>Hi, ${name}`;
   }
 }
